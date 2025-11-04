@@ -1,21 +1,26 @@
 'use strict';
 
+const correctFaces = [
+    ':)',
+    ';)',
+    ':-)',
+    ';-)',
+    ':D',
+    ';D',
+    ':-D',
+    ';-D',
+    ':~D',
+    ';~D',
+    ';~)',
+    ':~)',
+];
+
 function countSmiles(arr) {
-    const regex = /[:;][-~]?[)D]/g;
-    let smiles = 0;
-
-    arr.forEach((element) => {
-        if (element.match(regex)) smiles++;
-
-        // * If array element can contain more than one smile
-        // const match = element.match(regex);
-        // smiles += match ? match.length : 0;
-    });
-    return smiles;
+    return arr.filter((smile) => correctFaces.includes(smile)).length;
 }
 
-const correctFaces = [':)', ';)', ':-)', ';-)', ':D', ';D', ':~)', ';~)'];
-const incorrectFaces = [':(', ';(', ':-]', ';-(', ':[', ';(', ':~(', ';~['];
+const smiles1 = [':(', ';(', ':-]', ';(', ':~(', ';~['];
+const smiles2 = [':)', ';)', ':-)', ';-)', ':D', ';D'];
 
-console.log(countSmiles(correctFaces)); // 8
-console.log(countSmiles(incorrectFaces)); // 0
+console.log(countSmiles(smiles1)); // 0
+console.log(countSmiles(smiles2)); // 6
