@@ -1,19 +1,21 @@
 'use strict';
 
-function getGCD(a, b) {
-    if (a === 0 && b === 0) {
-        console.log('GCD(0,0) is defined as 0 by convention');
-        return 0;
-    }
+function countSmiles(arr) {
+    const regex = /[:;][-~]?[)D]/g;
+    let smiles = 0;
 
-    a = Math.abs(Math.round(a));
-    b = Math.abs(Math.round(b));
+    arr.forEach((element) => {
+        if (element.match(regex)) smiles++;
 
-    while (b !== 0) {
-        [a, b] = [b, a % b];
-    }
-    return a;
+        // * If array element can contain more than one smile
+        // const match = element.match(regex);
+        // smiles += match ? match.length : 0;
+    });
+    return smiles;
 }
 
-console.log(getGCD(0, 0));
-console.log(getGCD(192, 72));
+const correctFaces = [':)', ';)', ':-)', ';-)', ':D', ';D', ':~)', ';~)'];
+const incorrectFaces = [':(', ';(', ':-]', ';-(', ':[', ';(', ':~(', ';~['];
+
+console.log(countSmiles(correctFaces)); // 8
+console.log(countSmiles(incorrectFaces)); // 0
